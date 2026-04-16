@@ -22,7 +22,7 @@ export const routes: Routes = [
 },
   {
     path: '',
-    redirectTo: 'homepage',
-    pathMatch: 'full',
+    loadChildren: () =>
+      import('./feature/dashboard/dashboard-module').then((m) => m.DashboardModule),
   },
 ];

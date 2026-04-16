@@ -1,10 +1,9 @@
-<h1>Micro Frontend Shell</h1>
+<div class="d-flex flex-column min-vh-100">
+  <app-header></app-header>
 
-<nav style="background:#2c3e50; padding:10px;">
-  <a routerLink="/homepage" style="color:white; margin-right:15px;">Homepage</a>
-  <a routerLink="/courses" style="color:white;">Courses</a>
-</nav>
+  <main class="flex-fill">
+    <router-outlet></router-outlet>
+  </main>
 
-<hr>
-
-<router-outlet></router-outlet>
+  <app-footer></app-footer>
+</div>
