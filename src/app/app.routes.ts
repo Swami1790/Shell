@@ -19,10 +19,33 @@ export const routes: Routes = [
       remoteEntry: 'http://localhost:4202/remoteEntry.js',
       exposedModule: './Routes',
     }).then(m => m.routes),
-},
+  },
   {
-    path: '',
+    path: 'login',
+    loadChildren: () =>
+      loadRemoteModule({
+        type: 'module',
+        remoteEntry: 'http://localhost:4205/remoteEntry.js',
+        exposedModule: './AuthModule',
+      }).then((m) => m.AuthModule),
+  },
+  // {
+  //   path: 'cart',
+  //   loadChildren: () =>
+  //     loadRemoteModule({
+  //       type: 'module',
+  //       remoteEntry: 'http://localhost:4204/remoteEntry.js',
+  //       exposedModule: './CartModule',
+  //     }).then((m) => m.CartModule),
+  // },
+  {
+    path: 'view',
     loadChildren: () =>
       import('./feature/dashboard/dashboard-module').then((m) => m.DashboardModule),
+  },
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
   },
 ];
