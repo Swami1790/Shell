@@ -30,6 +30,16 @@ const routes: Routes = [
             exposedModule: './CartModule',
           }).then((m) => m.CartModule),
         canActivate: [AuthGuard]
+      },
+      {
+        path: 'user-preference',
+        loadChildren: () =>
+          loadRemoteModule({
+            type: 'module',
+            remoteEntry: 'http://localhost:4210/remoteEntry.js',
+            exposedModule: './UserPreferenceModule',
+          }).then((m) => m.UserPreferenceModule),
+        canActivate: [AuthGuard]
       }
     ]
   },
