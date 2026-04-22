@@ -11,7 +11,8 @@ export class Footer {
   bgColorClass = 'bg-primary';
 
   constructor(@Inject(UserPreferenceService) private userPreferenceService: UserPreferenceService) {
-    
+    this.setBgColorClass(userPreferenceService.currentPreference.primaryColor);
+
     userPreferenceService.preference$.subscribe((data) => {
       this.setBgColorClass(data.primaryColor);
     });

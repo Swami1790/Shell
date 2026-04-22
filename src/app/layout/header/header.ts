@@ -13,7 +13,8 @@ export class Header {
   bgColorClass = 'bg-primary';
 
   constructor(private router: Router, private authService: AuthService, @Inject(UserPreferenceService) private userPreferenceService: UserPreferenceService) {
-    
+    this.setBgColorClass(userPreferenceService.currentPreference.primaryColor);
+
     userPreferenceService.preference$.subscribe((data) => {
       this.setBgColorClass(data.primaryColor);
     });
