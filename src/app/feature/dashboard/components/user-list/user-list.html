@@ -7,3 +7,34 @@
 
   <app-footer></app-footer>
 </div> -->
+
+<div class="container-fluid p-5 h-100 position-absolute top-0 start-0 end-0 bottom-0"
+  [ngClass]="{'text-white bg-dark': currentTheme == 'dark'}">
+  <h5 class="mb-3">User List</h5>
+
+  <table class="table table-bordered">
+    <thead [ngClass]="{'table-light': currentTheme == 'dark', 'table-dark': currentTheme == 'light'}">
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Status</th>
+        <th>Location</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (user of users; track user.id) {
+      <tr [ngClass]="{'table-dark': currentTheme == 'dark'}">
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.role }}</td>
+        <td>{{ user.status }}</td>
+        <td>{{ user.location }}</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
