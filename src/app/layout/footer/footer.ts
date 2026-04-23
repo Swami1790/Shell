@@ -1,19 +1,28 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, NgZone, ChangeDetectorRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { UserPreferenceService } from 'shared-core';
 
 @Component({
   selector: 'app-footer',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './footer.html',
   styleUrl: './footer.css',
 })
 export class Footer {
   bgColorClass = 'bg-primary';
 
-  constructor(@Inject(UserPreferenceService) private userPreferenceService: UserPreferenceService) {
+  constructor(
+    private ngZone: NgZone,
+    private cdr: ChangeDetectorRef,
+    @Inject(UserPreferenceService) private userPreferenceService: UserPreferenceService
+  ) {
     
     userPreferenceService.preference$.subscribe((data) => {
-      this.setBgColorClass(data.primaryColor);
+      this.ngZone.run(() => {
+        this.setBgColorClass(data.primaryColor);
+        this.cdr.detectChanges();
+      });
     });
   }
 

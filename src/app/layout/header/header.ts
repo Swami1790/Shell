@@ -1,21 +1,32 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, NgZone, ChangeDetectorRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { UserPreferenceService } from 'shared-core';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, RouterLinkActive],
+  standalone: true,
+  imports: [CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
 export class Header {
   bgColorClass = 'bg-primary';
 
-  constructor(private router: Router, private authService: AuthService, @Inject(UserPreferenceService) private userPreferenceService: UserPreferenceService) {
+  constructor(
+    private router: Router, 
+    private authService: AuthService, 
+    private ngZone: NgZone,
+    private cdr: ChangeDetectorRef,
+    @Inject(UserPreferenceService) private userPreferenceService: UserPreferenceService
+  ) {
     
     userPreferenceService.preference$.subscribe((data) => {
-      this.setBgColorClass(data.primaryColor);
+      this.ngZone.run(() => {
+        this.setBgColorClass(data.primaryColor);
+        this.cdr.detectChanges();
+      });
     });
   }
 

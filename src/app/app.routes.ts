@@ -44,6 +44,11 @@ export const routes: Routes = [
       import('./feature/dashboard/dashboard-module').then((m) => m.DashboardModule),
   },
   {
+    path: 'react-app',
+    loadComponent: () =>
+      import('./feature/react-wrapper/react-wrapper').then((m) => m.ReactWrapper),
+  },
+  {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full',
