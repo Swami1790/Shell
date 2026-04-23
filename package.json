@@ -22,6 +22,7 @@
     "@angular/router": "^21.2.0",
     "bootstrap": "^5.3.8",
     "rxjs": "~7.8.0",
+    "shared-core": "file:dist/shared-core/shared-core-1.0.0.tgz",
     "tslib": "^2.3.0",
     "zone.js": "~0.16.1"
   },
